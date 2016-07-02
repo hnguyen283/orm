@@ -414,7 +414,6 @@ public class DealAPIController {
 
 		};
 
-		list.sort(sortByTime);
 		List<ImageDeal> images = new ArrayList<ImageDeal>();
 		for (TBL_Deal dealEle : list) {
 			ImageDeal imageDeal = new ImageDeal();

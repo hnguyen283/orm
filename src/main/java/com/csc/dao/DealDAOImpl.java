@@ -209,20 +209,16 @@ public class DealDAOImpl implements DealDAO {
 	public List<ResultObject> getDataDraw(String labels, String type) {
 		Session session = getSessionFactory().openSession();
 		ArrayList<ResultObject> listData = new ArrayList<ResultObject>();
-		// List<Object[]> results = session.createSQLQuery("SELECT * FROM
-		// tbl_deal JOIN tbl_item on tbl_deal.item_id = tbl_item.item_id JOIN
-		// tbl_type on tbl_item.type_id = tbl_type.type_id GROUP BY
-		// tbl_item.type_id").addEntity("tbl_deal",TBL_Deal.class).addEntity("tbl_type",TBL_Type.class).addEntity("tbl_item",TBL_Item.class).list();
 		List<Object[]> results = session
 				.createSQLQuery(
 						"SELECT tbl_type.type_name,count(tbl_deal.deal_id) FROM tbl_deal JOIN tbl_item on tbl_deal.item_id = tbl_item.item_id  JOIN tbl_type on tbl_item.type_id = tbl_type.type_id  GROUP BY tbl_item.type_id")
 				.list();
-		results.stream().forEach((record) -> {
-			String typeName = (String) record[0];
-			BigInteger count = (BigInteger) record[1];
-			System.out.println(typeName + " / " + count.intValue());
-			listData.add(new ResultObject(typeName, count.intValue()));
-		});
+//		results.stream().forEach((record) -> {
+//			String typeName = (String) record[0];
+//			BigInteger count = (BigInteger) record[1];
+//			System.out.println(typeName + " / " + count.intValue());
+//			listData.add(new ResultObject(typeName, count.intValue()));
+//		});
 		System.out.println(listData.size());
 		session.close();
 		return listData;
