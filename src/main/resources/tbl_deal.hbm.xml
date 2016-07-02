@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.csc.model.TBL_Deal" table="TBL_DEAL">
+		<id name="deal_id" type="long">
+			<column name="deal_id"></column>
+			<generator class="increment"></generator>
+		</id>
+
+		<property name="deal_owner" type="string">
+			<column name="deal_owner"></column>
+		</property>
+
+		<property name="deal_description" type="string">
+			<column name="deal_description"></column>
+		</property>
+
+		<property name="deal_begin" type="date">
+			<column name="deal_begin" not-null="true"></column>
+		</property>
+
+		<property name="deal_end" type="date">
+			<column name="deal_end" not-null="true"></column>
+		</property>
+
+		<property name="deal_price" type="double">
+			<column name="deal_price" not-null="true"></column>
+		</property>
+
+		<property name="deal_discount" type="float">
+			<column name="deal_discount" not-null="true"></column>
+		</property>
+
+		<property name="deal_status" type="string">
+			<column name="deal_status" not-null="true"></column>
+		</property>
+
+		<property name="deal_amount" type="double">
+			<column name="deal_amount" not-null="true"></column>
+		</property>
+
+		<property name="deal_acceptable" type="float">
+			<column name="deal_acceptable" not-null="true"></column>
+		</property>
+
+		<many-to-one name="tbl_item" class="com.csc.model.TBL_Item"
+			fetch="select" lazy="false">
+			<column name="item_id" not-null="true"></column>
+		</many-to-one>
+		
+		<many-to-one name="tbl_user" class="com.csc.model.TBL_User" fetch="select" lazy="false">
+			<column name="user_id" not-null="true"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

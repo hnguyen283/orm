@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.csc.model.TBL_Item" table="TBL_ITEM">
+		<id name="item_id" type="long">
+			<column name="item_id"></column>
+			<generator class="identity"></generator>
+		</id>
+		
+		<property name="item_owner" type="string">
+			<column name="item_owner"></column>
+		</property>
+				
+		<property name="item_name" type="string">
+			<column name="item_name" not-null="true"></column>
+		</property>
+		
+		<property name="item_description" type="string">
+			<column name="item_description"></column>
+		</property>
+		
+		<property name="item_describe" type="string">
+			<column name="item_describe"></column>
+		</property>
+		
+		
+		<many-to-one name="tbl_type" class="com.csc.model.TBL_Type" lazy="false" fetch="select">
+			<column name="type_id" not-null="true"></column>
+		</many-to-one>
+		
+		<set name="tbl_deals" table="TBL_DEAL" inverse="true" lazy="false" fetch="select">
+			<key>
+				<column name="item_id" not-null="true"></column>
+			</key>
+			<one-to-many class="com.csc.model.TBL_Deal"/>
+		</set>
+		
+		<!-- <set name="users" table="USER_ITEM" inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="item_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.csc.model.TBL_User">
+                <column name="user_id" not-null="true" />
+            </many-to-many>
+        </set> -->
+	</class>
+</hibernate-mapping>

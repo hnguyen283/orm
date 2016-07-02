@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.csc.model.TBL_Role" table="TBL_ROLE">
+		<id name="role_id" type="java.lang.Integer">
+            <column name="role_id" />
+			<generator class="identity" />
+        </id>
+        <set name="tbl_users" table="TBL_USER" inverse="true" lazy="false" fetch="select">
+			<key>
+				<column name="user_id" not-null="true" />
+			</key>
+			<one-to-many class="com.csc.model.TBL_User" />
+		</set>
+       
+		<property name="role_name" type="java.lang.String">
+			<column name="role_name" />
+		</property>		
+		
+	</class>
+</hibernate-mapping>

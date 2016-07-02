@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- MySQL data source -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/CSC_ECOMMER" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<!-- Hibernate session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>tbl_type.hbm.xml</value>
+				<value>tbl_user.hbm.xml</value>
+				<value>tbl_deal.hbm.xml</value>
+				<value>tbl_order.hbm.xml</value>
+				<value>tbl_orderdetail.hbm.xml</value>
+				<value>tbl_item.hbm.xml</value>
+				<value>tbl_role.hbm.xml</value>
+				<value>tbl_rate.hbm.xml</value>
+				<value>tbl_comment.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQL5Dialect
+				</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="itemDAO" class="com.csc.dao.ItemDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="itemService" class="com.csc.service.ItemServiceImpl"></bean>
+
+
+	<bean id="userDAO" class="com.csc.dao.UserDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="userService" class="com.csc.service.UserServiceImpl"></bean>
+
+	<bean id="roleDAO" class="com.csc.dao.RoleDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="roleService" class="com.csc.service.RoleServiceImpl"></bean>
+
+
+	<bean id="typeDAO" class="com.csc.dao.typeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="typeService" class="com.csc.service.TypeServiceImpl"></bean>
+
+	<bean id="dealDAO" class="com.csc.dao.DealDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="dealService" class="com.csc.service.DealServiceImpl"></bean>
+
+	<bean id="orderDAO" class="com.csc.dao.OrderDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="orderService" class="com.csc.service.OrderServiceImpl"></bean>
+
+
+	<bean id="orderDetailDAO" class="com.csc.dao.OrderDetailDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="orderDetailService" class="com.csc.service.OrderDetailServiceImpl"></bean>
+
+	<bean id="rateDAO" class="com.csc.dao.RateDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="rateService" class="com.csc.service.RateServiceImpl"></bean>
+
+	<bean id="commentDAO" class="com.csc.dao.CommentDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="commentService" class="com.csc.service.CommentServiceImpl"></bean>
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="465" />
+		<property name="username" value="tahoangnam2007@gmail.com" />
+		<property name="password" value="hoangnam1" />
+		<!-- The name of the property, following JavaBean naming conventions -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<context:component-scan
+		base-package="com.csc.model, com.csc.controller, com.csc.dao, com.csc.service, com.csc.api" />
+
+	<mvc:annotation-driven />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+</beans>

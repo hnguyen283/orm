@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.csc.model.TBL_Order" table="TBL_ORDER">
+		<id name="order_id" type="long">
+			<column name="order_id"></column>
+			<generator class="identity"></generator>
+		</id>
+		
+		<property name="order_date" type="date">
+			<column name="order_date" not-null="true"></column>
+		</property>
+		
+		<property name="customer_name" type="string">
+			<column name="customer_name" not-null="true"></column>
+		</property>
+		
+		<property name="customer_address" type="string">
+			<column name="customer_address" not-null="true"></column>
+		</property>
+		
+		<property name="customer_phone" type="string">
+			<column name="customer_phone" not-null="true"></column>
+		</property>
+		
+		<property name="customer_phone2" type="string">
+			<column name="customer_phone2" ></column>
+		</property>
+		
+		<property name="customer_email" type="string">
+			<column name="customer_email" not-null="true"></column>
+		</property>
+		
+		<property name="customer_email2" type="string">
+			<column name="customer_email2" ></column>
+		</property>
+		
+		<property name="order_comment" type="string">
+			<column name="order_comment" ></column>
+		</property>
+		
+		<property name="order_total" type="double">
+			<column name="order_total" ></column>
+		</property>
+		
+		<property name="order_status" type="string">
+			<column name="order_status" ></column>
+		</property>
+		
+		<property name="order_money_receive" type="double">
+			<column name="order_money_receive" ></column>
+		</property>
+		
+		<property name="order_money_chances" type="double">
+			<column name="order_money_chances" ></column>
+		</property>
+		
+		<set name="listOrderDetail" table="tbl_orderdetail" inverse="true" lazy="false" fetch="select" cascade="save-update">
+			<key>
+				<column name="order_id"></column>
+			</key>
+			
+			<one-to-many class="com.csc.model.TBL_OrderDetail"/>
+		</set>
+		
+		<many-to-one name="tbl_user" class="com.csc.model.TBL_User" fetch="select">
+			<column name="user_id" not-null="true"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

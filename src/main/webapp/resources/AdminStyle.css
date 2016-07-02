@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.logo{
+	text-align: center;
+	margin: 30px 0 30px 0;
+}
+
+.input-field label{
+	position: relative !important;
+	top: 0;
+	left: 0;
+}
+
+.ver-nav{
+	
+}
+
+.ver-nav li{
+	padding: 15 0 15 0;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.csc.model.TBL_Comment" table="TBL_COMMENT">
+		<id name="comment_id" type="long">
+			<column name="comment_id"></column>
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="comment_content" type="string">
+			<column name="comment_content"></column>
+		</property>
+		
+		<many-to-one name="tbl_user" class="com.csc.model.TBL_User" lazy="false" fetch="select">
+			<column name="user_id" not-null="true"></column>
+		</many-to-one>
+		
+        <many-to-one name="tbl_deal" class="com.csc.model.TBL_Deal" lazy="false" fetch="select">
+			<column name="deal_id" not-null="true"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

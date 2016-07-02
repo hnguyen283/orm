@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 19, 2016 10:57:32 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.csc.model.TBL_Type" table="TBL_TYPE">
+		<id name="type_id" type="java.lang.Long">
+			<column name="type_id" />
+			<generator class="identity" />
+		</id>
+		
+		<property name="type_name" type="java.lang.String">
+			<column name="type_name" />
+		</property>
+		
+		<property name="type_description" type="java.lang.String">
+			<column name="type_description"></column>
+		</property>
+		
+		<property name="type_icon" type="java.lang.String">
+			<column name="type_icon"></column>
+		</property>
+
+	</class>
+</hibernate-mapping>

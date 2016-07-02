@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.csc.model.TBL_User" table="TBL_USER">
+		<id name="user_id" type="java.lang.Long">
+			<column name="user_id" />
+			<generator class="identity" />
+		</id>
+		<property name="user_name" type="java.lang.String">
+			<column name="user_name" not-null="true" />
+		</property>
+		<property name="user_password" type="java.lang.String">
+			<column name="user_password" not-null="true" />
+		</property>
+		<property name="user_address" type="java.lang.String">
+			<column name="user_address" not-null="true" />
+		</property>
+		<property name="user_email" type="java.lang.String">
+			<column name="user_email" not-null="true" />
+		</property>
+		<property name="user_phone" type="java.lang.String">
+			<column name="user_phone" not-null="true" />
+		</property>
+
+		<property name="user_email2" type="java.lang.String">
+			<column name="user_email2" />
+		</property>
+		<property name="user_phone2" type="java.lang.String">
+			<column name="user_phone2" />
+		</property>
+		
+		<property name="user_status" type="java.lang.String">
+			<column name="user_status"></column>
+		</property>
+		
+		<many-to-one name="tbl_role" class="com.csc.model.TBL_Role" lazy="false" fetch="select">
+			<column name="role_id" not-null="true"></column>
+		</many-to-one>
+		
+		<set name="tbl_orders" table="TBL_ORDER" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="order_id" not-null="true" />
+			</key>
+			<one-to-many class="com.csc.model.TBL_Order" />
+		</set>
+		
+		<set name="tbl_items" table="TBL_ITEM" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="item_id" not-null="true" />
+			</key>
+			<one-to-many class="com.csc.model.TBL_Item" />
+		</set>
+		
+
+	</class>
+</hibernate-mapping>
+
